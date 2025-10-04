@@ -1,0 +1,112 @@
+{
+  "users": [
+    {
+      "password": "123123123",
+      "fullName": "Nguyễn Trí Thắng",
+      "email": "trithang1@gmail.com",
+      "phone": "0333743206",
+      "gender": true,
+      "status": true,
+      "id": 1
+    },
+    {
+      "password": "123123123",
+      "fullName": "Nguyễn Thị Thanh Hà",
+      "email": "trithang2@gmail.com",
+      "phone": "0999922332",
+      "gender": true,
+      "status": true,
+      "id": 2
+    },
+    {
+      "id": 3,
+      "fullName": "Trần Minh C",
+      "email": "tranminhc@gmail.com",
+      "phone": "0987654321",
+      "gender": false,
+      "status": false
+    },
+    {
+      "id": 4,
+      "fullName": "Nguyễn Duy D",
+      "email": "nguyenduyd@gmail.com",
+      "phone": "0987654321",
+      "gender": false,
+      "status": false
+    },
+    {
+      "id": 5,
+      "fullName": "Nguyễn Quảng E",
+      "email": "nguyenquange@gmail.com",
+      "phone": "0987654321",
+      "gender": false,
+      "status": false
+    },
+    {
+      "id": 6,
+      "fullName": "Ngô Văn F",
+      "email": "ngovnf@gmail.com",
+      "phone": "0987654321",
+      "gender": true,
+      "status": true
+    },
+    {
+      "id": 7,
+      "fullName": "Ngô Bá Khá",
+      "email": "ngobakha@gmail.com",
+      "phone": "0987654321",
+      "gender": true,
+      "status": true
+    }
+  ],
+  "admin": [
+    {
+      "id": 1,
+      "adminName": "Super Admin",
+      "email": "admin@rikkei.vn",
+      "password": "123123123"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Tiền đi học",
+      "imageUrl": "đường dẫn ảnh",
+      "status": true
+    },
+    {
+      "id": 2,
+      "name": "Tiền di chơi",
+      "imageUrl": "đường dẫn anh",
+      "status": false
+    }
+  ],
+  "monthlycategories": [
+    {
+      "id": 1,
+      "month": "2025-09-30",
+      "categories": [
+        {
+          "id": 1,
+          "categoryId": 1,
+          "budget": 300000
+        },
+        {
+          "id": 2,
+          "categoryId": 2,
+          "budget": 500000
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "createdDate": "2025-10-01",
+      "total": 150000,
+      "description": "Tiền đi chơi",
+      "categoryId": 1,
+      "monthlycategoryId": 1
+    }
+  ]
+}
