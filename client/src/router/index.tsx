@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import UserRegisterPage from "../components/forms/UserRegisterPage";
 import UserLoginPage from "../components/forms/UserLoginPage";
 import PageHome from "../Pages/users/PageHome";
+import InfomationUser from "../Pages/users/InfomationUser";
 import AdminPage from "../Pages/admin/AdminPage";
 import DashboardPage from "../Pages/admin/DashboardPage";
 import UserPage from "../Pages/admin/UserManagerPage";
@@ -14,9 +15,11 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
-      {/* USER ROUTES */}
+
+      {/* ===== USER ROUTES ===== */}
       <Route path="/login" element={<UserLoginPage />} />
       <Route path="/register" element={<UserRegisterPage />} />
+
       <Route
         path="/home"
         element={
@@ -24,11 +27,15 @@ export default function AppRouter() {
             <PageHome />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<Navigate to="information" replace />} />
+        <Route path="information" element={<InfomationUser />} />
+        <Route path="category" element={<InfomationUser />} />
+        <Route path="history" element={<InfomationUser />} />
+      </Route>
 
-      {/* ADMIN ROUTES */}
+      {/* ===== ADMIN ROUTES ===== */}
       <Route path="/admin/login" element={<LoginPage />} />
-
       <Route
         path="/admin"
         element={

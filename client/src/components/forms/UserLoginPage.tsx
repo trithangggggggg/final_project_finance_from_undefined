@@ -38,7 +38,7 @@ export default function UserLoginPage() {
     let isValid = true;
 
     if (!formData.username.trim()) {
-      newErrors.username = "Username is required";
+      newErrors.username = "Please enter your username ...";
       isValid = false;
     } else if (formData.username.length < 3) {
       newErrors.username = "At least 3 characters";
@@ -46,7 +46,7 @@ export default function UserLoginPage() {
     }
 
     if (!formData.password) {
-      newErrors.password = "Password is required";
+      newErrors.password = "Please enter your password ...";
       isValid = false;
     } else if (formData.password.length < 6) {
       newErrors.password = "At least 6 characters";

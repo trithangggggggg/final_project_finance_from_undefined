@@ -40,7 +40,7 @@
       "email": "nguyenquange@gmail.com",
       "phone": "0987654321",
       "gender": false,
-      "status": true
+      "status": false
     },
     {
       "id": 6,
@@ -56,7 +56,7 @@
       "email": "ngobakha@gmail.com",
       "phone": "0987654321",
       "gender": true,
-      "status": true
+      "status": false
     },
     {
       "password": "123123123",
@@ -168,6 +168,18 @@
           "budget": 500000
         }
       ]
+    },
+    {
+      "month": "2025-10",
+      "totalBudget": 5000000,
+      "categories": [],
+      "id": 2
+    },
+    {
+      "month": "2025-10",
+      "totalBudget": 5000000,
+      "categories": [],
+      "id": 3
     }
   ],
   "transactions": [

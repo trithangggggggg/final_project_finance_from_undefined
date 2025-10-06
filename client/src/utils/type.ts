@@ -27,3 +27,37 @@ export interface UserManagerState {
   error: string | null;
 }
 
+
+
+export interface ITransaction {
+  id: number;
+  createdDate: string;
+  total: number;
+  description: string;
+  categoryId: number;
+  monthlycategoryId: number;
+}
+
+export interface IMonthlyCategory {
+  id: number;
+  month: string;
+  totalBudget: number;
+  categories?: { id: number; categoryId: number; budget: number }[];
+}
+
+export interface FinanceState {
+  monthlycategories: IMonthlyCategory[];
+  transactions: ITransaction[];
+  selectedMonth: string;
+  currentMonthData: IMonthlyCategory | null;
+  remaining: number;
+  warningMessage: string;
+  loading: boolean;
+  error: string | null;
+}
+
+
+
+
+
+
