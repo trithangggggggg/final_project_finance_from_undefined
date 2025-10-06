@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import UserRegisterPage from "../components/forms/UserRegisterPage";
 import UserLoginPage from "../components/forms/UserLoginPage";
 import PageHome from "../Pages/users/PageHome";
@@ -7,18 +7,36 @@ import DashboardPage from "../Pages/admin/DashboardPage";
 import UserPage from "../Pages/admin/UserManagerPage";
 import CategoryPage from "../Pages/admin/CategoryPage";
 import LoginPage from "../components/forms/LoginPage";
+import ProtectedRoute from "../components/protectedRoute/ProtectedRoute";
+import ProtectedAdminRoute from "../components/protectedRoute/ProtectedAdminRoute";
 
 export default function AppRouter() {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
       {/* USER ROUTES */}
       <Route path="/login" element={<UserLoginPage />} />
       <Route path="/register" element={<UserRegisterPage />} />
-      <Route path="/home" element={<PageHome />} />
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <PageHome />
+          </ProtectedRoute>
+        }
+      />
 
-      {/* ADMIN ROUTES */}  
+      {/* ADMIN ROUTES */}
       <Route path="/admin/login" element={<LoginPage />} />
-      <Route path="/admin" element={<AdminPage />}>
+
+      <Route
+        path="/admin"
+        element={
+          <ProtectedAdminRoute>
+            <AdminPage />
+          </ProtectedAdminRoute>
+        }
+      >
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="users" element={<UserPage />} />
         <Route path="categories" element={<CategoryPage />} />

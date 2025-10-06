@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import background from "../../images/background.png";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../store/slice/authSlice";
+import type { RootState } from "../../store/store";
 
 export default function UserRegisterPage() {
   const [formData, setFormData] = useState({
@@ -17,7 +20,9 @@ export default function UserRegisterPage() {
   });
 
   const [successMessage, setSuccessMessage] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     if (
@@ -68,10 +73,7 @@ export default function UserRegisterPage() {
     if (!validateForm()) return;
 
     try {
-        
-      const res = await axios.get(
-        `http://localhost:8080/users?email=${formData.email}`
-      );
+      const res = await axios.get(`http://localhost:8080/users?email=${formData.email}`);
 
       if (res.data.length > 0) {
         setErrors({ ...errors, email: "Email already exists" });
@@ -79,16 +81,7 @@ export default function UserRegisterPage() {
         return;
       }
 
-      
-      await axios.post("http://localhost:8080/users", {
-        password: formData.password,
-        fullName: "",
-        email: formData.email,
-        phone: "",
-        gender: null,
-        status: null,
-      });
-
+      dispatch(registerUser(formData) as any);
       setSuccessMessage("Sign Up Successfully!");
       setTimeout(() => {
         navigate("/login");
@@ -122,7 +115,6 @@ export default function UserRegisterPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-            
           <div>
             <input
               type="text"
@@ -141,7 +133,6 @@ export default function UserRegisterPage() {
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             )}
           </div>
-
 
           <div>
             <input
@@ -162,7 +153,6 @@ export default function UserRegisterPage() {
             )}
           </div>
 
-
           <div>
             <input
               type="password"
@@ -177,9 +167,7 @@ export default function UserRegisterPage() {
                   : "focus:ring-green-400"
               }`}
               value={formData.confirmPassword}
-              onChange={(e) =>
-                handleChange("confirmPassword", e.target.value)
-              }
+              onChange={(e) => handleChange("confirmPassword", e.target.value)}
             />
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm mt-1">
@@ -190,9 +178,10 @@ export default function UserRegisterPage() {
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
           >
-            Sign Up
+            {loading ? "Processing..." : "Sign Up"}
           </button>
         </form>
 

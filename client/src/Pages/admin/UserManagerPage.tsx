@@ -1,62 +1,54 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { Search, Lock, Unlock } from "lucide-react";
+import {
+  fetchUsers,
+  toggleUserStatus,
+} from "../../store/slice/userManagerSlice";
 import type { User } from "../../utils/type";
+import type { RootState } from "../../store/store";
 
 export default function UserManagerPage() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const limit = 6; // 👉 mỗi trang 6 user
-
-  // 🟦 Gọi dữ liệu theo trang
-  useEffect(() => {
-    fetchUsers();
-  }, [currentPage]);
-
-  const fetchUsers = async () => {
-    try {
-      const res = await axios.get<User[]>(
-        `http://localhost:8080/users?_page=${currentPage}&_limit=${limit}`
-      );
-      const totalCount = parseInt(res.headers["x-total-count"] || "0", 10);
-      setUsers(res.data);
-      setTotalPages(Math.ceil(totalCount / limit));
-    } catch (error) {
-      console.error("Error khi tải dữ liệu:", error);
-      alert("Không thể tải danh sách người dùng!");
-    }
-  };
-
-  // 🟩 Toggle Lock / Unlock
-  const handleToggleStatus = async (user: User) => {
-    const newStatus = !user.status;
-    try {
-      await axios.patch(`http://localhost:8080/users/${user.id}`, {
-        status: newStatus,
-      });
-      setUsers((prev) =>
-        prev.map((u) => (u.id === user.id ? { ...u, status: newStatus } : u))
-      );
-    } catch (error) {
-      console.error("Error khi cập nhật trạng thái:", error);
-      alert("Không thể cập nhật trạng thái người dùng!");
-    }
-  };
-
-  // 🔍 Lọc user
-  const filteredUsers = users.filter(
-    (user) =>
-      (user.fullName || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (user.email || "").toLowerCase().includes(searchTerm.toLowerCase())
+  const dispatch: any = useDispatch();
+  const { users, loading, totalPages } = useSelector(
+    (state: RootState) => state.userManager
   );
 
-  const renderGender = (gender: boolean | null) => {
-    if (gender === true) return "Male";
-    if (gender === false) return "Female";
-    return "—";
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 6;
+
+  // 🟦 Lấy danh sách user
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      dispatch(fetchUsers({ page: currentPage, limit, search: searchTerm }));
+    }, 400); // ⏱ debounce để không spam API
+    return () => clearTimeout(delay);
+  }, [dispatch, currentPage, searchTerm]);
+
+  // 🟩 Đổi trạng thái user
+  const handleToggleStatus = (user: User) => {
+    dispatch(toggleUserStatus(user));
   };
+
+  // // 🔍 Lọc theo từ khóa
+  // const filteredUsers = users.filter(
+  //   (user) =>
+  //     (user.fullName || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     (user.email || "").toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
+  // 🧭 Chuyển trang
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const renderGender = (gender: boolean | null) =>
+    gender === true ? "Male" : gender === false ? "Female" : "—";
 
   const renderStatus = (status: boolean | null) => {
     if (status === true)
@@ -78,19 +70,10 @@ export default function UserManagerPage() {
     );
   };
 
-  // 🧭 Chuyển trang
-  const handlePrev = () => {
-    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-  };
-
   return (
-    <div className="flex flex-col bg-gray-50 p-6">
-      {/* 🔍 Ô tìm kiếm căn phải */}
-      <div className="mb-6 flex justify-end">
+    <div className="flex flex-col bg-gray-50 p-2 overflow-hidden h-[610px]">
+      {/* 🔍 Thanh tìm kiếm */}
+      <div className="mb-4 flex justify-end flex-shrink-0">
         <div className="w-full max-w-xs relative">
           <input
             type="text"
@@ -105,115 +88,137 @@ export default function UserManagerPage() {
         </div>
       </div>
 
-      {/* 🧾 Bảng dữ liệu */}
-      <div className="bg-white rounded-lg shadow-sm">
-        <table className="w-full table-fixed">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="w-[60px] px-4 py-3 text-left text-xs font-medium text-gray-500">
-                STT
-              </th>
-              <th className="w-[200px] px-4 py-3 text-left text-xs font-medium text-gray-500">
-                Name
-              </th>
-              <th className="w-[240px] px-4 py-3 text-left text-xs font-medium text-gray-500">
-                Email
-              </th>
-              <th className="w-[140px] px-4 py-3 text-left text-xs font-medium text-gray-500">
-                Phone
-              </th>
-              <th className="w-[100px] px-4 py-3 text-left text-xs font-medium text-gray-500">
-                Gender
-              </th>
-              <th className="w-[120px] px-4 py-3 text-left text-xs font-medium text-gray-500">
-                Status
-              </th>
-              <th className="w-[120px] px-4 py-3 text-left text-xs font-medium text-gray-500">
-                Action
-              </th>
-            </tr>
-          </thead>
-
-          <tbody className="bg-white">
-            {filteredUsers.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={7}
-                  className="text-center text-gray-500 py-6 text-sm"
-                >
-                  Không có dữ liệu người dùng.
-                </td>
-              </tr>
-            ) : (
-              filteredUsers.map((user, index) => (
-                <tr
-                  key={user.id}
-                  className="hover:bg-gray-50 transition-all h-[64px]"
-                >
-                  <td className="px-4 text-sm text-gray-700">
-                    {(currentPage - 1) * limit + index + 1}
-                  </td>
-                  <td className="px-4 text-sm font-medium text-gray-900 truncate">
-                    {user.fullName || "—"}
-                  </td>
-                  <td className="px-4 text-sm text-gray-700 truncate">
-                    {user.email}
-                  </td>
-                  <td className="px-4 text-sm text-gray-700">
-                    {user.phone || "—"}
-                  </td>
-                  <td className="px-4 text-sm text-gray-700">
-                    {renderGender(user.gender)}
-                  </td>
-                  <td className="px-4 text-sm">{renderStatus(user.status)}</td>
-                  <td className="px-4">
-                    {user.status ? (
-                      <button
-                        onClick={() => handleToggleStatus(user)}
-                        className="p-1.5 rounded hover:bg-green-50 text-green-600 flex items-center gap-1"
-                        title="Mở khóa tài khoản"
-                      >
-                        <Unlock size={16} />
-                        <span className="text-xs font-medium">Mở khóa</span>
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleToggleStatus(user)}
-                        className="p-1.5 rounded hover:bg-red-50 text-red-600 flex items-center gap-1"
-                        title="Khóa tài khoản"
-                      >
-                        <Lock size={16} />
-                        <span className="text-xs font-medium">Khóa</span>
-                      </button>
-                    )}
-                  </td>
+      {/* 🧾 Bảng danh sách */}
+      <div className="bg-white rounded-lg shadow-sm flex flex-col flex-1 overflow-auto max-h-[540px]">
+        <div className="overflow-y-auto flex-1">
+          {loading ? (
+            <div className="text-center py-6 text-gray-500 text-sm">
+              Đang tải...
+            </div>
+          ) : (
+            <table className="w-full table-fixed">
+              <thead className="bg-gray-100 sticky top-0">
+                <tr>
+                  <th className="w-[60px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    STT
+                  </th>
+                  <th className="w-[200px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Name
+                  </th>
+                  <th className="w-[240px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Email
+                  </th>
+                  <th className="w-[140px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Phone
+                  </th>
+                  <th className="w-[100px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Gender
+                  </th>
+                  <th className="w-[120px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Status
+                  </th>
+                  <th className="w-[120px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Action
+                  </th>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+              </thead>
 
-      {/* 🔢 Phân trang - Tách riêng, luôn cố định */}
-      <div className=" flex justify-end  fixed bottom-15 right-15">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handlePrev}
-            disabled={currentPage === 1}
-            className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            ←
-          </button>
-          <span className="px-3 py-1.5 bg-blue-600 text-white rounded">
-            {currentPage} / {totalPages}
-          </span>
-          <button
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-            className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            →
-          </button>
+              <tbody className="bg-white">
+                {users.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={7}
+                      className="text-center text-gray-500 py-6 text-sm"
+                    >
+                      Không có dữ liệu người dùng.
+                    </td>
+                  </tr>
+                ) : (
+                  users.map((user, index) => (
+                    <tr
+                      key={user.id}
+                      className="hover:bg-gray-50 transition-all h-[64px] border-b border-gray-100"
+                    >
+                      <td className="px-4 text-sm text-gray-700">
+                        {(currentPage - 1) * limit + index + 1}
+                      </td>
+                      <td className="px-4 text-sm font-medium text-gray-900 truncate">
+                        {user.fullName || "—"}
+                      </td>
+                      <td className="px-4 text-sm text-gray-700 truncate">
+                        {user.email}
+                      </td>
+                      <td className="px-4 text-sm text-gray-700">
+                        {user.phone || "—"}
+                      </td>
+                      <td className="px-4 text-sm text-gray-700">
+                        {renderGender(user.gender)}
+                      </td>
+                      <td className="px-4 text-sm">
+                        {renderStatus(user.status)}
+                      </td>
+                      <td className="px-4">
+                        {user.status ? (
+                          <button
+                            onClick={() => handleToggleStatus(user)}
+                            className="p-1.5 rounded-full hover:bg-green-100 text-green-600 flex items-center gap-1"
+                          >
+                            <Unlock size={16} />
+                            <span className="text-xs font-medium">Active</span>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleToggleStatus(user)}
+                            className="p-1.5 rounded-full hover:bg-red-100 text-red-600 flex items-center gap-1"
+                          >
+                            <Lock size={16} />
+                            <span className="text-xs font-medium ">
+                              Deactivate
+                            </span>
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          )}
+        </div>
+
+        {/* 🔢 Phân trang */}
+        <div className="  p-4 flex justify-end mb-1">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handlePrev}
+              disabled={currentPage === 1}
+              className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              ←
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`px-3 py-1.5 border rounded transition ${
+                  currentPage === page
+                    ? "bg-blue-600 text-white border-blue-600"
+                    : "border-gray-300 hover:bg-gray-100"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            <button
+              onClick={handleNext}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              →
+            </button>
+          </div>
         </div>
       </div>
     </div>

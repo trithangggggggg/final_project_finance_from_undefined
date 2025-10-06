@@ -15,20 +15,20 @@
       "email": "trithang2@gmail.com",
       "phone": "0999922332",
       "gender": true,
-      "status": true,
+      "status": false,
       "id": 2
     },
     {
       "id": 3,
-      "fullName": "Trần Minh C",
-      "email": "tranminhc@gmail.com",
+      "fullName": "Phạm Quốc Lộc",
+      "email": "locpham@gmail.com",
       "phone": "0987654321",
       "gender": false,
       "status": false
     },
     {
       "id": 4,
-      "fullName": "Nguyễn Duy D",
+      "fullName": "Nguyễn Duy Quang",
       "email": "nguyenduyd@gmail.com",
       "phone": "0987654321",
       "gender": false,
@@ -36,15 +36,15 @@
     },
     {
       "id": 5,
-      "fullName": "Nguyễn Quảng E",
+      "fullName": "Nguyễn Quảng An",
       "email": "nguyenquange@gmail.com",
       "phone": "0987654321",
       "gender": false,
-      "status": false
+      "status": true
     },
     {
       "id": 6,
-      "fullName": "Ngô Văn F",
+      "fullName": "Ngô Văn QUý",
       "email": "ngovnf@gmail.com",
       "phone": "0987654321",
       "gender": true,
@@ -57,6 +57,40 @@
       "phone": "0987654321",
       "gender": true,
       "status": true
+    },
+    {
+      "password": "123123123",
+      "fullName": "Vũ Việt Tiến",
+      "email": "trithang3@gmail.com",
+      "phone": "021312312312",
+      "gender": null,
+      "status": false,
+      "id": 8
+    },
+    {
+      "id": 9,
+      "fullName": "Trần Minh Cường",
+      "email": "tranminhc@gmail.com",
+      "phone": "0987654321",
+      "gender": false,
+      "status": true
+    },
+    {
+      "id": 10,
+      "fullName": "Trần Minh Cướng",
+      "email": "tranminhcuongg@gmail.com",
+      "phone": "0987654321",
+      "gender": false,
+      "status": false
+    },
+    {
+      "password": "123123123",
+      "fullName": "",
+      "email": "trithang5@gmail.com",
+      "phone": "",
+      "gender": null,
+      "status": null,
+      "id": 11
     }
   ],
   "admin": [
@@ -64,21 +98,58 @@
       "id": 1,
       "adminName": "Super Admin",
       "email": "admin@rikkei.vn",
-      "password": "123123123"
+      "password": "123123123",
+      "status": true
     }
   ],
   "categories": [
     {
       "id": 1,
       "name": "Tiền đi học",
-      "imageUrl": "đường dẫn ảnh",
+      "imageUrl": "duongdananh/tien_di_hoc.png",
       "status": true
     },
     {
       "id": 2,
-      "name": "Tiền di chơi",
-      "imageUrl": "đường dẫn anh",
+      "name": "Tiền xăng",
+      "imageUrl": "duongdananh/tien_xang.png",
       "status": false
+    },
+    {
+      "id": 3,
+      "name": "Tiền ăn",
+      "imageUrl": "duongdananh/tien_an.png",
+      "status": true
+    },
+    {
+      "id": 4,
+      "name": "Tiền đi chơi",
+      "imageUrl": "duongdananh/tien_di_choi.png",
+      "status": false
+    },
+    {
+      "id": 5,
+      "name": "Tiền cho con",
+      "imageUrl": "duongdananh/tien_cho_con.png",
+      "status": true
+    },
+    {
+      "id": 6,
+      "name": "Tiền dự phòng",
+      "imageUrl": "duongdananh/tien_du_phong.png",
+      "status": true
+    },
+    {
+      "id": 7,
+      "name": "Tiền sửa đồ",
+      "imageUrl": "duongdananh/tien_sua_do.png",
+      "status": true
+    },
+    {
+      "id": 8,
+      "name": "Tiền cà phê",
+      "imageUrl": "duongdananh/tien_ca_phe.png",
+      "status": true
     }
   ],
   "monthlycategories": [

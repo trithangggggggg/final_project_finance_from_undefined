@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import background from "../../images/background.png";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/slice/authSlice";
+import type { RootState } from "../../store/store";
 
 export default function UserLoginPage() {
   const [formData, setFormData] = useState({
-    username: "", // UI hiển thị là username
+    username: "",
     password: "",
+    errorMessage:""
   });
 
   const [errors, setErrors] = useState({
@@ -15,7 +18,12 @@ export default function UserLoginPage() {
   });
 
   const [successMessage, setSuccessMessage] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { loading, errorMessage } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   useEffect(() => {
     if (formData.username.trim().length >= 3 && formData.password.length >= 6) {
@@ -55,39 +63,10 @@ export default function UserLoginPage() {
 
     if (!validateForm()) return;
 
-    try {
-      const res = await axios.get("http://localhost:8080/users", {
-        params: {
-          email: formData.username,
-          password: formData.password,
-        },
-      });
-
-      if (res.data.length > 0) {
-        // Lấy user đầu tiên (chỉ có 1 user đúng)
-        const currentUser = res.data[0];
-
-        // Lưu vào localStorage
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify({
-            id: currentUser.id,
-            email: currentUser.email,
-          })
-        );
-
-        setSuccessMessage("Sign In Successfully!");
-
-        setTimeout(() => navigate("/home"), 1000);
-      } else {
-        setErrors({
-          username: "",
-          password: "Invalid username or password",
-        });
-      }
-    } catch (error) {
-      alert("Error while logging in");
-      console.error(error);
+    const result = await dispatch(loginUser(formData) as any);
+    if (result.meta.requestStatus === "fulfilled") {
+      setSuccessMessage("Sign In Successfully!");
+      setTimeout(() => navigate("/home"), 700);
     }
   };
 
@@ -122,9 +101,10 @@ export default function UserLoginPage() {
                 errors.username ? "focus:ring-red-400" : "focus:ring-blue-400"
               }`}
               value={formData.username}
-              onChange={(e) =>
-                setFormData({ ...formData, username: e.target.value })
-              }
+              onChange={(e) => {
+                setFormData({ ...formData, username: e.target.value });
+                setErrors((prev) => ({ ...prev, username: "" }));
+              }}
             />
             {errors.username && (
               <p className="text-red-500 text-sm mt-1">{errors.username}</p>
@@ -143,20 +123,30 @@ export default function UserLoginPage() {
                 errors.password ? "focus:ring-red-400" : "focus:ring-blue-400"
               }`}
               value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
+              onChange={(e) => {
+                setFormData({ ...formData, password: e.target.value });
+                setErrors((prev) => ({ ...prev, password: "" }));
+              }}
             />
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+
+            {/* ✅ Nếu login sai: hiển thị Email or password is incorrect */}
+            {errorMessage ? (
+              <p className="text-red-500 text-sm mt-1">
+                Email or password is incorrect
+              </p>
+            ) : (
+              errors.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+              )
             )}
           </div>
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
           >
-            Sign In
+            {loading ? "Processing..." : "Sign In"}
           </button>
         </form>
 
