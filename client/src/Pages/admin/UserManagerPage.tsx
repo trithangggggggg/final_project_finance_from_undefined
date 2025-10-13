@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search, Lock, Unlock } from "lucide-react";
-import {
-  fetchUsers,
-  toggleUserStatus,
-} from "../../store/slice/userManagerSlice";
+import {fetchUsers, toggleUserStatus,} from "../../store/slice/userManagerSlice";
 import type { User } from "../../utils/type";
 import type { RootState } from "../../store/store";
 
 export default function UserManagerPage() {
-  const dispatch: any = useDispatch();
+  const dispatch:any = useDispatch();
   const { users, loading, totalPages } = useSelector(
     (state: RootState) => state.userManager
   );
@@ -22,7 +19,7 @@ export default function UserManagerPage() {
   useEffect(() => {
     const delay = setTimeout(() => {
       dispatch(fetchUsers({ page: currentPage, limit, search: searchTerm }));
-    }, 400); // ⏱ debounce để không spam API
+    }, 400);
     return () => clearTimeout(delay);
   }, [dispatch, currentPage, searchTerm]);
 
@@ -31,7 +28,6 @@ export default function UserManagerPage() {
     dispatch(toggleUserStatus(user));
   };
 
-  // // 🔍 Lọc theo từ khóa
   // const filteredUsers = users.filter(
   //   (user) =>
   //     (user.fullName || "").toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -13,20 +13,41 @@ import DevonLane from "../../images/DevonLane.png";
 import DianneRussell from "../../images/DianneRussell.png";
 import JaneCooper from "../../images/JaneCooper.png";
 import JennyWilson from "../../images/JennyWilson.png";
+import type { User } from "../../utils/type";
+import axios from "axios";
 
 export default function DashboardPage() {
   const [selectedPeriod, setSelectedPeriod] = useState("12 Months");
+  const [toltalUsers, setToltalUsers] = useState<number | null>(null);
+  const [toltalCategory, setToltalCategory] = useState<number | null>(null);
+
+
+  useEffect(()=>{
+    const getData = async ()=>{
+      try {
+        const [User, Category] = await Promise.all([
+          axios.get("http://localhost:8080/users"),
+          axios.get("http://localhost:8080/categories")
+        ]);
+        setToltalUsers(User.data.length);
+        setToltalCategory(Category.data.length);
+      } catch (error) {
+        console.log("1111",error);
+      }
+    };
+    getData();
+  },[]);
 
   const chartData = [
     { month: "Feb", value1: 55000, value2: 30000 },
     { month: "Mar", value1: 38000, value2: 33000 },
     { month: "Apr", value1: 42000, value2: 36000 },
-    { month: "May", value1: 60000, value2: 35000 },
+    { month: "May", value1: 23000, value2: 30000 },
     { month: "Jun", value1: 45691, value2: 39000 },
     { month: "Jul", value1: 12000, value2: 37000 },
     { month: "Aug", value1: 46000, value2: 40000 },
     { month: "Sep", value1: 48000, value2: 42000 },
-    { month: "Oct", value1: 80000, value2: 45000 },
+    { month: "Oct", value1: 54000, value2: 45000 },
     { month: "Nov", value1: 50000, value2: 44000 },
     { month: "Dec", value1: 54000, value2: 47000 },
     { month: "Jan", value1: 96000, value2: 49000 },
@@ -85,7 +106,7 @@ export default function DashboardPage() {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="text-xs text-gray-500 uppercase mb-2">User</div>
           <div className="flex items-end justify-between">
-            <div className="text-3xl font-bold text-gray-900">1,500</div>
+            <div className="text-3xl font-bold text-gray-900">{toltalUsers !== null ? toltalUsers : "loadingg..."} user</div>
             <div className="text-sm text-green-600 font-medium">+ 36% ↑</div>
           </div>
         </div>
@@ -94,7 +115,7 @@ export default function DashboardPage() {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="text-xs text-gray-500 uppercase mb-2">Category</div>
           <div className="flex items-end justify-between">
-            <div className="text-3xl font-bold text-gray-900">500</div>
+            <div className="text-3xl font-bold text-gray-900">{toltalCategory !== null ? toltalCategory : "Loading..."} category</div>
             <div className="text-sm text-red-600 font-medium">+ 14% ↓</div>
           </div>
         </div>

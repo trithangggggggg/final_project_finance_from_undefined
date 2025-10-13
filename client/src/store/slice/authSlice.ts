@@ -20,7 +20,7 @@ export const registerUser = createAsyncThunk(
         email: formData.email,
         phone: "",
         gender: null,
-        status: null,
+        status: true,
       });
       return response.data;
     } catch (error) {

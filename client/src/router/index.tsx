@@ -10,6 +10,8 @@ import CategoryPage from "../Pages/admin/CategoryPage";
 import LoginPage from "../components/forms/LoginPage";
 import ProtectedRoute from "../components/protectedRoute/ProtectedRoute";
 import ProtectedAdminRoute from "../components/protectedRoute/ProtectedAdminRoute";
+import CategoryUser from "../Pages/users/CategoryUser";
+import HistoryUser from "../Pages/users/HistoryUser";
 
 export default function AppRouter() {
   return (
@@ -30,8 +32,8 @@ export default function AppRouter() {
       >
         <Route index element={<Navigate to="information" replace />} />
         <Route path="information" element={<InfomationUser />} />
-        <Route path="category" element={<InfomationUser />} />
-        <Route path="history" element={<InfomationUser />} />
+        <Route path="category" element={<CategoryUser />} />
+        <Route path="history" element={<HistoryUser />} />
       </Route>
 
       {/* ===== ADMIN ROUTES ===== */}

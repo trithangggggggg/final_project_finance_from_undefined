@@ -1,96 +1,13 @@
 {
   "users": [
     {
-      "password": "123123123",
+      "password": "999999999",
       "fullName": "Nguyễn Trí Thắng",
       "email": "trithang1@gmail.com",
       "phone": "0333743206",
-      "gender": true,
+      "gender": "Female",
       "status": true,
       "id": 1
-    },
-    {
-      "password": "123123123",
-      "fullName": "Nguyễn Thị Thanh Hà",
-      "email": "trithang2@gmail.com",
-      "phone": "0999922332",
-      "gender": true,
-      "status": false,
-      "id": 2
-    },
-    {
-      "id": 3,
-      "fullName": "Phạm Quốc Lộc",
-      "email": "locpham@gmail.com",
-      "phone": "0987654321",
-      "gender": false,
-      "status": false
-    },
-    {
-      "id": 4,
-      "fullName": "Nguyễn Duy Quang",
-      "email": "nguyenduyd@gmail.com",
-      "phone": "0987654321",
-      "gender": false,
-      "status": false
-    },
-    {
-      "id": 5,
-      "fullName": "Nguyễn Quảng An",
-      "email": "nguyenquange@gmail.com",
-      "phone": "0987654321",
-      "gender": false,
-      "status": false
-    },
-    {
-      "id": 6,
-      "fullName": "Ngô Văn QUý",
-      "email": "ngovnf@gmail.com",
-      "phone": "0987654321",
-      "gender": true,
-      "status": true
-    },
-    {
-      "id": 7,
-      "fullName": "Ngô Bá Khá",
-      "email": "ngobakha@gmail.com",
-      "phone": "0987654321",
-      "gender": true,
-      "status": false
-    },
-    {
-      "password": "123123123",
-      "fullName": "Vũ Việt Tiến",
-      "email": "trithang3@gmail.com",
-      "phone": "021312312312",
-      "gender": null,
-      "status": false,
-      "id": 8
-    },
-    {
-      "id": 9,
-      "fullName": "Trần Minh Cường",
-      "email": "tranminhc@gmail.com",
-      "phone": "0987654321",
-      "gender": false,
-      "status": true
-    },
-    {
-      "id": 10,
-      "fullName": "Trần Minh Cướng",
-      "email": "tranminhcuongg@gmail.com",
-      "phone": "0987654321",
-      "gender": false,
-      "status": false
-    },
-    {
-      "password": "123123123",
-      "fullName": "",
-      "email": "trithang5@gmail.com",
-      "phone": "",
-      "gender": null,
-      "status": null,
-      "id": 11
     }
   ],
   "admin": [
@@ -104,92 +21,156 @@
   ],
   "categories": [
     {
-      "id": 1,
-      "name": "Tiền đi học",
-      "imageUrl": "duongdananh/tien_di_hoc.png",
-      "status": true
+      "name": "Tiền điện",
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378526/eltzjmqbqwm0gdrgyalr.jpg",
+      "status": true,
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Tiền xăng",
-      "imageUrl": "duongdananh/tien_xang.png",
-      "status": false
+      "name": "Tiền học phí",
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378655/ubvkors1oixu62tp4hgr.jpg",
+      "status": true,
+      "id": 2
     },
     {
-      "id": 3,
       "name": "Tiền ăn",
-      "imageUrl": "duongdananh/tien_an.png",
-      "status": true
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378680/vewghg3k30c7esqqzqnm.jpg",
+      "status": true,
+      "id": 3
     },
     {
-      "id": 4,
+      "name": "Tiền nhà",
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378697/fppr5sxz1unn9f8nmfae.jpg",
+      "status": true,
+      "id": 4
+    },
+    {
+      "name": "Tiền tiết kiệm",
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378725/myd8ep6r2kdabjm7kcjr.jpg",
+      "status": true,
+      "id": 5
+    },
+    {
+      "name": "Tiền mua sắm",
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378744/olp01yhe9ojgwarlwirs.jpg",
+      "status": false,
+      "id": 6
+    },
+    {
       "name": "Tiền đi chơi",
-      "imageUrl": "duongdananh/tien_di_choi.png",
-      "status": false
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378764/tzjdbtcco6px5rcakldg.jpg",
+      "status": true,
+      "id": 7
     },
     {
-      "id": 5,
-      "name": "Tiền cho con",
-      "imageUrl": "duongdananh/tien_cho_con.png",
-      "status": true
-    },
-    {
-      "id": 6,
-      "name": "Tiền dự phòng",
-      "imageUrl": "duongdananh/tien_du_phong.png",
-      "status": true
-    },
-    {
-      "id": 7,
-      "name": "Tiền sửa đồ",
-      "imageUrl": "duongdananh/tien_sua_do.png",
-      "status": true
-    },
-    {
-      "id": 8,
-      "name": "Tiền cà phê",
-      "imageUrl": "duongdananh/tien_ca_phe.png",
-      "status": true
+      "name": "Tiền mua oto",
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378799/y3fqgoyilqbao2mafcgx.jpg",
+      "status": false,
+      "id": 8
     }
   ],
   "monthlycategories": [
     {
-      "id": 1,
-      "month": "2025-09-30",
+      "userId": 1,
+      "month": "2025-10",
+      "totalBudget": 10000000,
       "categories": [
         {
-          "id": 1,
           "categoryId": 1,
+          "budget": 1000000
+        },
+        {
+          "categoryId": 2,
           "budget": 300000
         },
         {
-          "id": 2,
-          "categoryId": 2,
-          "budget": 500000
+          "categoryId": 3,
+          "budget": 1500000
+        },
+        {
+          "categoryId": 4,
+          "budget": 3000000
+        },
+        {
+          "categoryId": 5,
+          "budget": 2000000
+        },
+        {
+          "categoryId": 7,
+          "budget": 2000000
         }
-      ]
+      ],
+      "id": 1
     },
     {
-      "month": "2025-10",
+      "userId": 1,
+      "month": "2025-09",
       "totalBudget": 5000000,
       "categories": [],
       "id": 2
     },
     {
-      "month": "2025-10",
-      "totalBudget": 5000000,
+      "userId": 1,
+      "month": "2025-11",
+      "totalBudget": 7000000,
       "categories": [],
       "id": 3
     }
   ],
   "transactions": [
     {
-      "id": 1,
-      "createdDate": "2025-10-01",
-      "total": 150000,
-      "description": "Tiền đi chơi",
+      "createdDate": "2025-10-13",
+      "total": 1000000,
+      "description": "Đã nộp tiền điện T10",
       "categoryId": 1,
-      "monthlycategoryId": 1
+      "monthlyCategoryId": 1,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "createdDate": "2025-10-13",
+      "total": 300000,
+      "description": "Nộp học phí trung tâm N3",
+      "categoryId": 2,
+      "monthlyCategoryId": 1,
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "createdDate": "2025-10-13",
+      "total": 1000000,
+      "description": "Gia đình ăn tối",
+      "categoryId": 3,
+      "monthlyCategoryId": 1,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "createdDate": "2025-10-13",
+      "total": 3500000,
+      "description": "Tiền nhà T10",
+      "categoryId": 4,
+      "monthlyCategoryId": 1,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "createdDate": "2025-10-13",
+      "total": 3000000,
+      "description": "Tiết kiệm mua posche",
+      "categoryId": 5,
+      "monthlyCategoryId": 1,
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "createdDate": "2025-10-13",
+      "total": 2000000,
+      "description": "Chơi bên Dubai",
+      "categoryId": 7,
+      "monthlyCategoryId": 1,
+      "userId": 1,
+      "id": 6
     }
   ]
 }

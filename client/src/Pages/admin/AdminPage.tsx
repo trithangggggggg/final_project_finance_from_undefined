@@ -28,7 +28,7 @@ export default function AdminPage() {
             to="dashboard"
             className={({ isActive }) =>
               `flex items-center gap-2 px-3 py-2 text-sm  ${
-                isActive ? "text-blue-600 bg-white border-b" : "text-gray-700 hover:bg-bue-100 border-b border-gray-200 "
+                isActive ? "text-blue-600 bg-white border-b" : "text-gray-700 hover:bg-blue-100 border-b border-gray-200 "
               }`
             }
           >

@@ -43,6 +43,7 @@ export interface IMonthlyCategory {
   month: string;
   totalBudget: number;
   categories?: { id: number; categoryId: number; budget: number }[];
+  userId:number
 }
 
 export interface FinanceState {
@@ -54,10 +55,23 @@ export interface FinanceState {
   warningMessage: string;
   loading: boolean;
   error: string | null;
+  flag: boolean;
 }
 
 
+export interface Category {
+  id: number;
+  name: string;
+  image: string; 
+  status: boolean | null;
+}
 
+export interface CategoryState {
+  categories: Category[];
+  totalPages: number;
+  loading: boolean;
+  error: string | null;
+}
 
 
 

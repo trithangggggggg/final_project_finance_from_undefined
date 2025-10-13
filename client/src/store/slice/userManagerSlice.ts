@@ -14,7 +14,7 @@ export const fetchUsers = createAsyncThunk<
   { users: User[]; totalPages: number },
   { page: number; limit: number; search?: string }
 >("userManager/fetchUsers", async ({ page, limit, search }) => {
-  const searchQuery = search ? `&q=${encodeURIComponent(search)}` : "";
+  const searchQuery = search ? `&q=${encodeURIComponent(search)}` : ""; 
   const res = await axios.get<User[]>(
     `http://localhost:8080/users?_page=${page}&_limit=${limit}${searchQuery}`
   );
