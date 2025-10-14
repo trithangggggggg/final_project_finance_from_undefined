@@ -5,7 +5,7 @@ export interface User {
   fullName: string;
   email: string;
   phone: string;
-  gender: boolean | null;
+  gender: boolean |string | null;
   status: boolean | null;
 }
 

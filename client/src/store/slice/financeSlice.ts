@@ -55,7 +55,7 @@ export const fetchMonthlyCategory = createAsyncThunk<IMonthlyCategory, string>(
   }
 );
 
-// 2) Cập nhật ngân sách tháng (PATCH)
+// 2) Cập nhật ngân sách tháng
 export const updateMonthlyBudget = createAsyncThunk<
   IMonthlyCategory,
   { id: number; totalBudget: number }
@@ -72,7 +72,7 @@ export const updateMonthlyBudget = createAsyncThunk<
   }
 });
 
-// 3) Lấy danh sách giao dịch của THÁNG hiện tại
+// 3) Lấy danh sách giao dịch của THÁNG hiện tạii
 export const fetchTransactions = createAsyncThunk<ITransaction[], number>(
   "finance/fetchTransactions",
   async (monthlyCategoryId) => {
@@ -84,8 +84,7 @@ export const fetchTransactions = createAsyncThunk<ITransaction[], number>(
         return [];
       }
 
-      // ⚠️ Sửa tham số: đúng là monthlyCategoryId (C viết hoa)
-      // Lọc ngay trên server theo cả userId + monthlyCategoryId để chắc chắn chỉ trả về đúng tháng
+     
       const { data } = await axios.get<ITransaction[]>(
         `${BASE_URL}/transactions?userId=${userId}&monthlyCategoryId=${monthlyCategoryId}`
       );

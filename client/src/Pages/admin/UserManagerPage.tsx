@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search, Lock, Unlock } from "lucide-react";
-import {fetchUsers, toggleUserStatus,} from "../../store/slice/userManagerSlice";
+import {
+  fetchUsers,
+  toggleUserStatus,
+} from "../../store/slice/userManagerSlice";
 import type { User } from "../../utils/type";
 import type { RootState } from "../../store/store";
 
 export default function UserManagerPage() {
-  const dispatch:any = useDispatch();
+  const dispatch: any = useDispatch();
   const { users, loading, totalPages } = useSelector(
     (state: RootState) => state.userManager
   );
@@ -43,8 +46,12 @@ export default function UserManagerPage() {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  const renderGender = (gender: boolean | null) =>
-    gender === true ? "Male" : gender === false ? "Female" : "—";
+  const renderGender = (gender: boolean | string | null | undefined): string => {
+  if (gender === true || gender === "Male") return "Male";
+  if (gender === false || gender === "Female") return "Female";
+  return "—";
+};
+
 
   const renderStatus = (status: boolean | null) => {
     if (status === true)

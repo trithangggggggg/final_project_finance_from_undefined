@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "password": "999999999",
+      "password": "123123123",
       "fullName": "Nguyễn Trí Thắng",
       "email": "trithang1@gmail.com",
       "phone": "0333743206",
-      "gender": "Female",
+      "gender": "Male",
       "status": true,
       "id": 1
     }
