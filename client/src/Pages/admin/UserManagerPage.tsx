@@ -80,7 +80,7 @@ export default function UserManagerPage() {
         <div className="w-full max-w-xs relative">
           <input
             type="text"
-            placeholder="Search here"
+            placeholder="Search here..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -133,7 +133,7 @@ export default function UserManagerPage() {
                       colSpan={7}
                       className="text-center text-gray-500 py-6 text-sm"
                     >
-                      Không có dữ liệu người dùng.
+                      Không có dữ liệu người dùng...
                     </td>
                   </tr>
                 ) : (

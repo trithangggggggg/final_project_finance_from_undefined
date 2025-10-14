@@ -11,6 +11,7 @@ import {
   clearWarning,
   updateLocalRemaining,
 } from "../../store/slice/financeSlice";
+import ModalLogout from "../../components/ui/ModalLogout";
 
 export default function PageHome() {
   const dispatch = useDispatch<AppDispatch>();
@@ -72,10 +73,10 @@ export default function PageHome() {
     if (!currentMonthData) return;
     const totalBudget = Number(budgetInput);
 
-    if ( totalBudget == 0) {
+    if (totalBudget == 0) {
       setErrorBudget("Vui lòng nhập ngân sách ");
       return;
-    }else if (isNaN(totalBudget) || totalBudget < 0){
+    } else if (isNaN(totalBudget) || totalBudget < 0) {
       setErrorBudget("Ngân sách không hợp lệ ");
       return;
     }
@@ -112,7 +113,11 @@ export default function PageHome() {
   };
 
   const sidebarItems = [
-    {name: "Information", icon: <Info size={16} />, path: "/home/information",},
+    {
+      name: "Information",
+      icon: <Info size={16} />,
+      path: "/home/information",
+    },
     { name: "Category", icon: <Shapes size={16} />, path: "/home/category" },
     { name: "History", icon: <History size={16} />, path: "/home/history" },
   ];
@@ -263,26 +268,10 @@ export default function PageHome() {
 
       {/* Modal logout */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
-            <h3 className="text-lg font-semibold mb-4">Xác nhận đăng xuất</h3>
-            <p className="text-gray-600 mb-6">Bạn có chắc muốn đăng xuất?</p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowModal(false)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-              >
-                Hủy
-              </button>
-              <button
-                onClick={handleLogout}
-                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-              >
-                Đăng xuất
-              </button>
-            </div>
-          </div>
-        </div>
+        <ModalLogout
+          onClose={() => setShowModal(false)}
+          onConfirm={handleLogout}
+        />
       )}
     </div>
   );

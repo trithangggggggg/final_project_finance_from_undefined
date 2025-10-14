@@ -8,6 +8,42 @@
       "gender": "Male",
       "status": true,
       "id": 1
+    },
+    {
+      "password": "123123123",
+      "fullName": "Jenny Wilson",
+      "email": "jenny-wilson@gmail.com",
+      "phone": "0333743206",
+      "gender": "Male",
+      "status": true,
+      "id": 2
+    },
+    {
+      "password": "123123123",
+      "fullName": "Devon Lane",
+      "email": "devon-lane@gmail.com",
+      "phone": "0333743206",
+      "gender": "Male",
+      "status": true,
+      "id": 3
+    },
+    {
+      "password": "123123123",
+      "fullName": "Jane Cooper",
+      "email": "jane-cooper@gmail.com",
+      "phone": "0333743206",
+      "gender": "Male",
+      "status": true,
+      "id": 4
+    },
+    {
+      "password": "123123123",
+      "fullName": "Dianne Russell",
+      "email": "dianne-russell@gmail.com",
+      "phone": "0333777999",
+      "gender": "Male",
+      "status": true,
+      "id": 5
     }
   ],
   "admin": [
@@ -115,6 +151,13 @@
       "totalBudget": 7000000,
       "categories": [],
       "id": 3
+    },
+    {
+      "userId": 5,
+      "month": "2025-10",
+      "totalBudget": 0,
+      "categories": [],
+      "id": 4
     }
   ],
   "transactions": [
@@ -153,15 +196,6 @@
       "monthlyCategoryId": 1,
       "userId": 1,
       "id": 4
-    },
-    {
-      "createdDate": "2025-10-13",
-      "total": 3000000,
-      "description": "Tiết kiệm mua posche",
-      "categoryId": 5,
-      "monthlyCategoryId": 1,
-      "userId": 1,
-      "id": 5
     },
     {
       "createdDate": "2025-10-13",

@@ -16,7 +16,7 @@ export default function AddCategoryModal({ onClose, category }: AddCategoryModal
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // 🟠 Điền sẵn thông tin khi edit
+  // Điền sẵn thông tin khi edit
   useEffect(() => {
     if (category) {
       setCategoryName(category.name);
@@ -24,7 +24,7 @@ export default function AddCategoryModal({ onClose, category }: AddCategoryModal
     }
   }, [category]);
 
-  // 📤 Upload ảnh lên Cloudinary
+  //  Upload ảnh lên Cloudinary
   const uploadToCloudinary = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append("file", file);
@@ -63,7 +63,7 @@ export default function AddCategoryModal({ onClose, category }: AddCategoryModal
       }
 
       if (category) {
-        // 🟢 Cập nhật
+        // Cập nhật
         await dispatch(
           updateCategory({
             id: category.id,
@@ -72,15 +72,15 @@ export default function AddCategoryModal({ onClose, category }: AddCategoryModal
           })
         );
       } else {
-        // 🟠 Thêm mới
+        // Thêm mới
         await dispatch(
           addCategory({ name: categoryName.trim(), image: imageUrl || "" })
         );
       }
 
       onClose();
-    } catch (err) {
-      console.error("❌ Lỗi khi lưu danh mục:", err);
+    } catch (error) {
+      console.error("Lỗi khi lưu danh mục:", error);
     } finally {
       setLoading(false);
     }

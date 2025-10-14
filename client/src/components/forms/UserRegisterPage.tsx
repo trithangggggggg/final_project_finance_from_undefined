@@ -41,7 +41,7 @@ export default function UserRegisterPage() {
     let isValid = true;
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Please enter your username ...";
       isValid = false;
     } else if (!formData.email.endsWith("@gmail.com")) {
       newErrors.email = "Email must end with @gmail.com";
@@ -49,7 +49,7 @@ export default function UserRegisterPage() {
     }
 
     if (!formData.password) {
-      newErrors.password = "Password is required";
+      newErrors.password = "Please enter your password ...";
       isValid = false;
     } else if (formData.password.length < 6) {
       newErrors.password = "At least 6 characters";
@@ -57,7 +57,7 @@ export default function UserRegisterPage() {
     }
 
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Please confirm password";
+      newErrors.confirmPassword = "Please enter your confirm password";
       isValid = false;
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
@@ -85,7 +85,7 @@ export default function UserRegisterPage() {
       setSuccessMessage("Sign Up Successfully!");
       setTimeout(() => {
         navigate("/login");
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error(error);
     }

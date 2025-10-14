@@ -1,4 +1,4 @@
-import React, { type JSX } from "react";
+import type { JSX } from "react";
 import { Navigate } from "react-router-dom";
 
 interface ProtectedAdminRouteProps {
@@ -8,7 +8,7 @@ interface ProtectedAdminRouteProps {
 export default function ProtectedAdminRoute({ children }: ProtectedAdminRouteProps): JSX.Element {
   const currentAdmin = localStorage.getItem("currentAdmin");
 
-  // Nếu chưa đăng nhập admin
+  // Nếu chưa đăng nhập admin thì ko cho vào trang 
   if (!currentAdmin || currentAdmin === "{}") {
     return <Navigate to="/admin/login" replace />;
   }

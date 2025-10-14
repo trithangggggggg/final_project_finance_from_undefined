@@ -39,19 +39,21 @@ export default function DashboardPage() {
   },[]);
 
   const chartData = [
-    { month: "Feb", value1: 55000, value2: 30000 },
-    { month: "Mar", value1: 38000, value2: 33000 },
-    { month: "Apr", value1: 42000, value2: 36000 },
-    { month: "May", value1: 23000, value2: 30000 },
-    { month: "Jun", value1: 45691, value2: 39000 },
-    { month: "Jul", value1: 12000, value2: 37000 },
-    { month: "Aug", value1: 46000, value2: 40000 },
-    { month: "Sep", value1: 48000, value2: 42000 },
-    { month: "Oct", value1: 54000, value2: 45000 },
-    { month: "Nov", value1: 50000, value2: 44000 },
-    { month: "Dec", value1: 54000, value2: 47000 },
-    { month: "Jan", value1: 96000, value2: 49000 },
-  ];
+  { month: "Feb", value1: 22000, value2: 48000 },
+  { month: "Mar", value1: 41000, value2: 46000 },
+  { month: "Apr", value1: 47000, value2: 52000 },
+  { month: "May", value1: 55000, value2: 50000 },
+  { month: "Jun", value1: 80000, value2: 57000 },
+  { month: "Jul", value1: 58000, value2: 63000 },
+  { month: "Aug", value1: 67000, value2: 61000 },
+  { month: "Sep", value1: 64000, value2: 70000 },
+  { month: "Oct", value1: 52000, value2: 68000 },
+  { month: "Nov", value1: 76000, value2: 74000 },
+  { month: "Dec", value1: 81000, value2: 77000 },
+  { month: "Jan", value1: 98000, value2: 83000 },
+];
+
+
 
   const customers = [
     {
@@ -99,7 +101,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
+    <div className="p-4 bg-gray-50  overflow-hidden">
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-6 mb-8">
         {/* User Card */}
