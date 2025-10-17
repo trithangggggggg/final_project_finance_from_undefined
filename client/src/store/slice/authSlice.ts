@@ -41,6 +41,7 @@ export const loginUser = createAsyncThunk(
         params: {
           email: credentials.username,
           password: credentials.password,
+          // status: credentials.status
         },
       });
 

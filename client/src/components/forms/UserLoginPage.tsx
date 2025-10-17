@@ -9,7 +9,8 @@ export default function UserLoginPage() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    errorMessage:""
+    errorMessage:"",
+    status: true
   });
 
   const [errors, setErrors] = useState({
@@ -51,6 +52,11 @@ export default function UserLoginPage() {
     } else if (formData.password.length < 6) {
       newErrors.password = "At least 6 characters";
       isValid = false;
+    }
+
+    if(formData.status !== true){
+      setSuccessMessage("Your account have block ! contact admin now!");
+      isValid = false
     }
 
     setErrors(newErrors);

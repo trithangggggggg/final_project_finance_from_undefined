@@ -34,7 +34,7 @@ export default function PageHome() {
     email: string;
   } | null>(null);
 
-  // ✅ Kiểm tra user khi load trang
+  // Kiểm tra user khi load trang
   useEffect(() => {
     const storedUser = localStorage.getItem("currentUser");
     if (!storedUser) {
@@ -53,7 +53,7 @@ export default function PageHome() {
     }
   }, [navigate]);
 
-  // 🔄 Khi đổi tháng → fetch dữ liệu tháng tương ứng
+  // Khi đổi tháng → fetch dữ liệu tháng tương ứng
   useEffect(() => {
     const delay = setTimeout(() => {
       if (monthInput) {
@@ -68,7 +68,7 @@ export default function PageHome() {
     return () => clearTimeout(delay);
   }, [monthInput, dispatch]);
 
-  // 🟢 Lưu ngân sách tháng
+  //  Lưu ngân sách tháng
   const handleSaveBudget = async () => {
     if (!currentMonthData) return;
     const totalBudget = Number(budgetInput);

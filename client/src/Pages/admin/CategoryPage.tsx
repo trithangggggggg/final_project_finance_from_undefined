@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import AddCategoryModal from "../../components/ui/AddCategoryModal";
-import { fetchCategories, toggleCategoryStatus } from "../../store/slice/adminCategory";
+import {
+  fetchCategories,
+  toggleCategoryStatus,
+} from "../../store/slice/adminCategory";
 import type { RootState } from "../../store/store";
 import type { Category } from "../../utils/type";
+import axios from "axios";
 
 export default function CategoryPage() {
   const dispatch: any = useDispatch();
@@ -18,19 +22,34 @@ export default function CategoryPage() {
   const [showModal, setShowModal] = useState(false);
   const limit = 6;
 
+  // useEffect(()=>{
+  //   setCurrentPage(1);
+  // },[searchTerm])
+
   useEffect(() => {
     const delay = setTimeout(() => {
-      dispatch(fetchCategories({ page: currentPage, limit, search: searchTerm }));
+      dispatch(
+        fetchCategories({ page: currentPage, limit, search: searchTerm })
+      );
     }, 400);
     return () => clearTimeout(delay);
   }, [dispatch, currentPage, searchTerm]);
 
-  const handleToggleStatus = (category: Category) => dispatch(toggleCategoryStatus(category));
+  const handleToggleStatus = (category: Category) =>
+    dispatch(toggleCategoryStatus(category));
 
   const handleEdit = (category: Category) => {
     setEditingCategory(category);
     setShowModal(true);
   };
+
+  
+// const handleDelete = async (id: number) => {
+//   if (confirm("Bạn có chắc muốn xóa danh mục này không?")) {
+//     await axios.delete(`http://localhost:8080/categories/${id}`);
+//     dispatch(fetchCategories({page: currentPage, limit, search: searchTerm}));
+//   }
+// };
 
   const handlePrev = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -73,22 +92,37 @@ export default function CategoryPage() {
       <div className="bg-white rounded-lg shadow-sm flex flex-col flex-1 overflow-auto max-h-[540px]">
         <div className="overflow-y-auto flex-1">
           {loading ? (
-            <div className="text-center py-6 text-gray-500 text-sm">Đang tải...</div>
+            <div className="text-center py-6 text-gray-500 text-sm">
+              Đang tải...
+            </div>
           ) : (
             <table className="w-full table-fixed">
               <thead className="bg-gray-100 sticky top-0">
                 <tr>
-                  <th className="w-[60px] px-4 py-3 text-left text-xs font-medium text-gray-500">STT</th>
-                  <th className="w-[220px] px-4 py-3 text-left text-xs font-medium text-gray-500">Name</th>
-                  <th className="w-[150px] px-4 py-3 text-left text-xs font-medium text-gray-500">Image</th>
-                  <th className="w-[120px] px-4 py-3 text-left text-xs font-medium text-gray-500">Status</th>
-                  <th className="w-[180px] px-4 py-3 text-left text-xs font-medium text-gray-500">Action</th>
+                  <th className="w-[60px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    STT
+                  </th>
+                  <th className="w-[220px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Name
+                  </th>
+                  <th className="w-[150px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Image
+                  </th>
+                  <th className="w-[120px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Status
+                  </th>
+                  <th className="w-[180px] px-4 py-3 text-left text-xs font-medium text-gray-500">
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white">
                 {categories.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="text-center text-gray-500 py-6 text-sm">
+                    <td
+                      colSpan={5}
+                      className="text-center text-gray-500 py-6 text-sm"
+                    >
                       Không có dữ liệu danh mục.
                     </td>
                   </tr>
@@ -153,6 +187,12 @@ export default function CategoryPage() {
                         >
                           {category.status ? "Block" : "Unblock"}
                         </button>
+                        {/* <button
+                          onClick={() => handleDelete(category.id)}
+                          className=" bg-red-500 hover:bg-red-700"
+                        >
+                          Xóa
+                        </button> */}
                       </td>
                     </tr>
                   ))
@@ -162,7 +202,7 @@ export default function CategoryPage() {
           )}
         </div>
 
-        {/* 🔢 Phân trang giống UserManagerPage */}
+        {/* Phân trang giống */}
         <div className="p-4 flex justify-end mb-1">
           <div className="flex items-center gap-2">
             <button

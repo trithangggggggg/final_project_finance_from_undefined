@@ -6,7 +6,7 @@
       "email": "trithang1@gmail.com",
       "phone": "0333743206",
       "gender": "Male",
-      "status": true,
+      "status": false,
       "id": 1
     },
     {
@@ -24,7 +24,7 @@
       "email": "devon-lane@gmail.com",
       "phone": "0333743206",
       "gender": "Male",
-      "status": true,
+      "status": false,
       "id": 3
     },
     {
@@ -44,6 +44,42 @@
       "gender": "Male",
       "status": true,
       "id": 5
+    },
+    {
+      "password": "123123123",
+      "fullName": "Donal Trump",
+      "email": "donamtrung@gmail.com",
+      "phone": "0999232336",
+      "gender": "Male",
+      "status": true,
+      "id": 6
+    },
+    {
+      "password": "123123123",
+      "fullName": "Hoàng Cửu Bảo",
+      "email": "undefined1412@gmail.com",
+      "phone": "0230999936",
+      "gender": "Female",
+      "status": true,
+      "id": 7
+    },
+    {
+      "password": "123123123",
+      "fullName": "Pham Quoc Loc",
+      "email": "demo1@gmail.com",
+      "phone": "0202997272",
+      "gender": "Female",
+      "status": true,
+      "id": 8
+    },
+    {
+      "password": "123123123",
+      "fullName": "",
+      "email": "trithang2@gmail.com",
+      "phone": "",
+      "gender": null,
+      "status": false,
+      "id": 9
     }
   ],
   "admin": [
@@ -99,8 +135,8 @@
       "id": 7
     },
     {
-      "name": "Tiền mua oto",
-      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760378799/y3fqgoyilqbao2mafcgx.jpg",
+      "name": "Tiền đi ngủ",
+      "image": "https://res.cloudinary.com/diprwc5iy/image/upload/v1760606339/zpe4k0mfa41nypeywmom.jpg",
       "status": false,
       "id": 8
     }
@@ -142,7 +178,16 @@
       "userId": 1,
       "month": "2025-09",
       "totalBudget": 5000000,
-      "categories": [],
+      "categories": [
+        {
+          "categoryId": 2,
+          "budget": 2000000
+        },
+        {
+          "categoryId": 5,
+          "budget": 3000000
+        }
+      ],
       "id": 2
     },
     {
@@ -158,6 +203,48 @@
       "totalBudget": 0,
       "categories": [],
       "id": 4
+    },
+    {
+      "userId": 6,
+      "month": "2025-10",
+      "totalBudget": 0,
+      "categories": [],
+      "id": 5
+    },
+    {
+      "userId": 7,
+      "month": "2025-10",
+      "totalBudget": 20000000,
+      "categories": [
+        {
+          "categoryId": 7,
+          "budget": 2000000
+        }
+      ],
+      "id": 6
+    },
+    {
+      "userId": 8,
+      "month": "2025-10",
+      "totalBudget": 0,
+      "categories": [],
+      "id": 7
+    },
+    {
+      "userId": 9,
+      "month": "2025-10",
+      "totalBudget": 10000000,
+      "categories": [
+        {
+          "categoryId": 1,
+          "budget": 3000000
+        },
+        {
+          "categoryId": 5,
+          "budget": 1000000
+        }
+      ],
+      "id": 8
     }
   ],
   "transactions": [
@@ -205,6 +292,87 @@
       "monthlyCategoryId": 1,
       "userId": 1,
       "id": 6
+    },
+    {
+      "createdDate": "2025-10-15",
+      "total": 2500000,
+      "description": "đi sapa",
+      "categoryId": 7,
+      "monthlyCategoryId": 6,
+      "userId": 7,
+      "id": 7
+    },
+    {
+      "createdDate": "2025-10-15",
+      "total": 3000000,
+      "description": "tiết kiệm tháng 9",
+      "categoryId": 5,
+      "monthlyCategoryId": 2,
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "createdDate": "2025-10-15",
+      "total": 2500000,
+      "description": "Đóng cho rikkei",
+      "categoryId": 2,
+      "monthlyCategoryId": 2,
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "createdDate": "2025-10-16",
+      "total": 1500000,
+      "description": "tien dien t10",
+      "categoryId": 1,
+      "monthlyCategoryId": 8,
+      "userId": 9,
+      "id": 10
+    },
+    {
+      "createdDate": "2025-10-16",
+      "total": 10000,
+      "description": "tiet kiem mua oto",
+      "categoryId": 5,
+      "monthlyCategoryId": 8,
+      "userId": 9,
+      "id": 11
+    },
+    {
+      "createdDate": "2025-10-16",
+      "total": 20000,
+      "description": "mua pin",
+      "categoryId": 1,
+      "monthlyCategoryId": 8,
+      "userId": 9,
+      "id": 12
+    },
+    {
+      "createdDate": "2025-10-16",
+      "total": 20000,
+      "description": "tiet kiem mua vang",
+      "categoryId": 5,
+      "monthlyCategoryId": 8,
+      "userId": 9,
+      "id": 13
+    },
+    {
+      "createdDate": "2025-10-16",
+      "total": 10000,
+      "description": "tiet kiem mua so do",
+      "categoryId": 5,
+      "monthlyCategoryId": 8,
+      "userId": 9,
+      "id": 14
+    },
+    {
+      "createdDate": "2025-10-16",
+      "total": 30000,
+      "description": "mua nha",
+      "categoryId": 1,
+      "monthlyCategoryId": 8,
+      "userId": 9,
+      "id": 15
     }
   ]
 }

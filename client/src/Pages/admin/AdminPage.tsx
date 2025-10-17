@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import ModalLogout from "../../components/ui/ModalLogout";
 
 export default function AdminPage() {
   const [showMenu, setShowMenu] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    // TODO: thêm logic xóa token hoặc dispatch logout admin
     console.log("Admin logged out");
     setShowLogoutConfirm(false);
+    navigate("/admin/login")
   };
 
   return (
@@ -58,7 +59,7 @@ export default function AdminPage() {
           </NavLink>
         </nav>
 
-        {/* Sign out ở sidebar → mở modal confirm */}
+        {/* modal confirm signout */}
         <div className="p-4 mt-auto">
           <button
             type="button"

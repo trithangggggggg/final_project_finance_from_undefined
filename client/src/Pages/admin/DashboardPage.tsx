@@ -8,7 +8,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { FileDown } from "lucide-react";
-// 👉 bạn tự import ảnh ở đây
 import DevonLane from "../../images/DevonLane.png";
 import DianneRussell from "../../images/DianneRussell.png";
 import JaneCooper from "../../images/JaneCooper.png";

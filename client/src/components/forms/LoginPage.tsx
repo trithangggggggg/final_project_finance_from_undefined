@@ -5,7 +5,7 @@ import axios from "axios";
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [formError, setFormError] = useState(""); // lỗi tổng (sai tk hoặc bị khóa)
+  const [formError, setFormError] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
       setErrors({ email: "", password: "" });
       navigate("/admin/dashboard");
     } catch (error) {
-      setFormError("Cannot connect to server. Please try again later!");
+      setFormError("Cannot connect to server. Please try again later  ");
     }
   };
 
@@ -121,7 +121,7 @@ export default function AdminLoginPage() {
                 Remember me
               </label>
               <p>
-                Don’t have an account?{" "}
+                Don't have an account?{" "}
                 <Link to="/login" className="text-indigo-600 hover:underline">
                   click here!
                 </Link>

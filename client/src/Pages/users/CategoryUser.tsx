@@ -21,7 +21,7 @@ export default function CategoryUser() {
   const [showModal, setShowModal] = useState(false);
   const [editingCategory, setEditingCategory] = useState<any | null>(null);
 
-  // 🧠 Load danh mục admin & user mỗi khi đổi tháng
+  // Load danh mục admin & user mỗi khi đổi tháng
   useEffect(() => {
     if (currentMonthData?.categories) {
       setUserCategories(currentMonthData.categories);
@@ -35,7 +35,7 @@ export default function CategoryUser() {
       .catch(() => setAdminCategories([]));
   }, [currentMonthData]);
 
-  // 🟢 Xử lý thêm danh mục mới cho tháng
+  // Xử lý thêm danh mục mới cho tháng
   const handleAddCategory = async () => {
     if (!selectedCategoryId || !limitAmount) {
       setErrorMessage("Vui lòng chọn danh mục và nhập số tiền!");
@@ -95,7 +95,7 @@ export default function CategoryUser() {
     }
   };
 
-  // 🗑️ Xử lý xóa danh mục khỏi tháng hiện tại
+  // Xử lý xóa danh mục khỏi tháng hiện tại
 const handleDeleteCategory = async (categoryId: number) => {
   if (!currentMonthData) return;
 
@@ -117,7 +117,7 @@ const handleDeleteCategory = async (categoryId: number) => {
     // Cập nhật lại redux
     dispatch(fetchMonthlyCategory(selectedMonth));
   } catch (error) {
-    console.error("❌ Lỗi khi xóa danh mục:", error);
+    console.error(" Lỗi khi xóa danh mục:", error);
   } finally {
     setSaving(false);
   }

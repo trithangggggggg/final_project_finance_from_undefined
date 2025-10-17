@@ -3,13 +3,17 @@ import { X, Upload, Trash2 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addCategory, updateCategory } from "../../store/slice/adminCategory";
 import type { Category } from "../../utils/type";
+import axios from "axios";
 
 interface AddCategoryModalProps {
   onClose: () => void;
   category?: Category | null;
 }
 
-export default function AddCategoryModal({ onClose, category }: AddCategoryModalProps) {
+export default function AddCategoryModal({
+  onClose,
+  category,
+}: AddCategoryModalProps) {
   const dispatch: any = useDispatch();
   const [categoryName, setCategoryName] = useState("");
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -30,13 +34,17 @@ export default function AddCategoryModal({ onClose, category }: AddCategoryModal
     formData.append("file", file);
     formData.append("upload_preset", "categoryProject");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/diprwc5iy/image/upload", {
-      method: "POST",
-      body: formData,
-    });
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/diprwc5iy/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     const data = await res.json();
-    if (!data.secure_url) throw new Error(data?.error?.message || "Upload thất bại!");
+    if (!data.secure_url)
+      throw new Error(data?.error?.message || "Upload thất bại!");
     return data.secure_url;
   };
 
@@ -54,7 +62,14 @@ export default function AddCategoryModal({ onClose, category }: AddCategoryModal
 
   const handleSave = async () => {
     if (!categoryName.trim()) return;
-
+    // const res = await axios.get("http://localhost:8080/categories");
+    // const isExist = res.data.find(
+    //   (item: {name:string}) => item.name.trim().toLowerCase() === categoryName.trim().toLowerCase()
+    // );
+    // if (isExist) {
+    //   alert("Danh mục này đã tồn tại!");
+    //   return;
+    // }
     try {
       setLoading(true);
       let imageUrl = preview;
@@ -136,9 +151,15 @@ export default function AddCategoryModal({ onClose, category }: AddCategoryModal
             <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
               <div className="flex items-center space-x-3">
                 <div className="w-16 h-16 border border-gray-200 rounded overflow-hidden">
-                  <img src={preview} alt="Preview" className="w-full h-full object-cover" />
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <span className="text-sm text-gray-700">{uploadedFile?.name || "Current image"}</span>
+                <span className="text-sm text-gray-700">
+                  {uploadedFile?.name || "Current image"}
+                </span>
               </div>
               <button
                 onClick={handleRemoveImage}

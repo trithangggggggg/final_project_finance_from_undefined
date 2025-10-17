@@ -9,7 +9,7 @@ const initialState: CategoryState = {
   error: null,
 };
 
-// 🟨 Thêm danh mục mới
+// Thêm danh mục mới
 export const addCategory = createAsyncThunk<
   Category,
   { name: string; image: string }
@@ -37,7 +37,7 @@ export const fetchCategories = createAsyncThunk<
   };
 });
 
-// 🟩 Đổi trạng thái hoạt động / khóa
+// Đổi trạng thái hoạt động / khóa
 export const toggleCategoryStatus = createAsyncThunk<
   { id: number; status: boolean | null },
   Category
@@ -49,7 +49,7 @@ export const toggleCategoryStatus = createAsyncThunk<
   return { id: category.id, status: newStatus };
 });
 
-// 🟨 Cập nhật danh mục
+// Cập nhật danh mục
 export const updateCategory = createAsyncThunk<
   Category,
   { id: number; name: string; image: string }
@@ -67,7 +67,7 @@ const adminCategorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // 🟦 Fetch categories
+      // Fetch categories
       .addCase(fetchCategories.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -82,7 +82,7 @@ const adminCategorySlice = createSlice({
         state.error = "Không thể tải danh sách danh mục!";
       })
 
-      // 🟨 Add category
+      // Add category
       .addCase(addCategory.fulfilled, (state, action) => {
         state.categories.unshift(action.payload);
       })
@@ -93,7 +93,7 @@ const adminCategorySlice = createSlice({
         );
       })
 
-      // 🟩 Toggle status
+      // Toggle status
       .addCase(toggleCategoryStatus.fulfilled, (state, action) => {
         const { id, status } = action.payload;
         state.categories = state.categories.map((c) =>

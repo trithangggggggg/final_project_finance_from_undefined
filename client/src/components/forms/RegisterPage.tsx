@@ -20,7 +20,7 @@
 //     phone: "",
 //   });
 
-//   const navigate = useNavigate(); // 👈 dùng để chuyển trang
+//   const navigate = useNavigate();
 
 //   const validateForm = () => {
 //     const newErrors = {

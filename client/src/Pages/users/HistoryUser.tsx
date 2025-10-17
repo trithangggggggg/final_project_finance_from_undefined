@@ -9,7 +9,9 @@ const BASE_URL = "http://localhost:8080";
 
 export default function HistoryUser() {
   const dispatch = useDispatch<AppDispatch>();
-  const { transactions, loading } = useSelector((state: RootState) => state.finance);
+  const { transactions, loading } = useSelector(
+    (state: RootState) => state.finance
+  );
   const { user } = useSelector((state: RootState) => state.auth);
   const { currentMonthData } = useSelector((state: RootState) => state.finance);
 
@@ -43,7 +45,7 @@ export default function HistoryUser() {
     fetchAdminCategories();
   }, []);
 
-  // Khi đổi tháng: reset UI cục bộ + fetch giao dịch của tháng mới
+  // Khi đổi tháng sẽ reset UI + fetch giao dịch của tháng mới
   useEffect(() => {
     const loadMonth = async () => {
       if (!currentMonthData?.id) return;
@@ -67,7 +69,8 @@ export default function HistoryUser() {
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
     if (!total) newErrors.total = "Vui lòng nhập số tiền";
-    else if (isNaN(Number(total)) || Number(total) <= 0) newErrors.total = "Số tiền không hợp lệ";
+    else if (isNaN(Number(total)) || Number(total) <= 0)
+      newErrors.total = "Số tiền không hợp lệ";
     if (!categoryId) newErrors.categoryId = "Vui lòng chọn danh mục";
     if (!description) newErrors.description = "Vui lòng nhập ghi chú";
     setErrors(newErrors);
@@ -80,7 +83,9 @@ export default function HistoryUser() {
 
     const userId = user?.id || currentMonthData?.userId;
     if (!userId || !currentMonthData?.id) {
-      alert("Không tìm thấy userId hoặc monthlyCategoryId — vui lòng đăng nhập lại!");
+      alert(
+        "Không tìm thấy userId hoặc monthlyCategoryId — vui lòng đăng nhập lại!"
+      );
       return;
     }
 
@@ -94,7 +99,10 @@ export default function HistoryUser() {
     };
 
     try {
-      const { data } = await axios.post(`${BASE_URL}/transactions`, newTransaction);
+      const { data } = await axios.post(
+        `${BASE_URL}/transactions`,
+        newTransaction
+      );
       // Sau khi thêm thành công, fetch lại dữ liệu tháng hiện tại
       await dispatch(fetchTransactions(currentMonthData.id));
       // Reset form
@@ -124,7 +132,6 @@ export default function HistoryUser() {
 
   // Filter + sort
   const filtered = useMemo(() => {
-    // QUAN TRỌNG: chỉ lấy giao dịch của đúng tháng hiện tại
     const monthId = currentMonthData?.id;
     let list = [...transactions]
       .filter((t: any) => t.monthlyCategoryId === monthId)
@@ -165,7 +172,9 @@ export default function HistoryUser() {
             type="number"
             placeholder="Số tiền"
           />
-          {errors.total && <span className="text-red-500 text-xs mt-1">{errors.total}</span>}
+          {errors.total && (
+            <span className="text-red-500 text-xs mt-1">{errors.total}</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -175,12 +184,16 @@ export default function HistoryUser() {
             className="border-gray-200 border rounded-lg w-[180px] h-[42px]"
           >
             <option value="">Chọn danh mục</option>
-            {currentMonthData?.categories && currentMonthData.categories.length > 0 ? (
+            {currentMonthData?.categories &&
+            currentMonthData.categories.length > 0 ? (
               currentMonthData.categories.map((c: any) => {
-                const categoryInfo = adminCategories.find((adminCat) => adminCat.id === c.categoryId);
+                const categoryInfo = adminCategories.find(
+                  (adminCat) => adminCat.id === c.categoryId
+                );
                 return (
                   <option key={c.categoryId} value={c.categoryId}>
-                    {categoryInfo?.name || `Danh mục ${c.categoryId}`} ({c.budget.toLocaleString()} VND)
+                    {categoryInfo?.name || `Danh mục ${c.categoryId}`} (
+                    {c.budget.toLocaleString()} VND)
                   </option>
                 );
               })
@@ -188,7 +201,11 @@ export default function HistoryUser() {
               <option disabled>Không có danh mục tháng</option>
             )}
           </select>
-          {errors.categoryId && <span className="text-red-500 text-xs mt-1">{errors.categoryId}</span>}
+          {errors.categoryId && (
+            <span className="text-red-500 text-xs mt-1">
+              {errors.categoryId}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -199,7 +216,11 @@ export default function HistoryUser() {
             type="text"
             placeholder="Ghi chú"
           />
-          {errors.description && <span className="text-red-500 text-xs mt-1">{errors.description}</span>}
+          {errors.description && (
+            <span className="text-red-500 text-xs mt-1">
+              {errors.description}
+            </span>
+          )}
         </div>
 
         <button
@@ -213,11 +234,15 @@ export default function HistoryUser() {
       {/* History table */}
       <div className="bg-white rounded-2xl mt-6 shadow-lg border border-gray-100 p-6">
         <div className="flex flex-wrap justify-between items-center mb-4">
-          <span className="font-medium text-gray-700 text-lg">🧾 Lịch sử giao dịch (theo tháng)</span>
+          <span className="font-medium text-gray-700 text-lg">
+            🧾 Lịch sử giao dịch (theo tháng)
+          </span>
 
           <div className="flex gap-2 items-center">
             <select
-              onChange={(e) => setSortOrder(e.target.value as "asc" | "desc" | "none")}
+              onChange={(e) =>
+                setSortOrder(e.target.value as "asc" | "desc" | "none")
+              }
               className="border border-gray-300 rounded-lg text-sm px-2 py-1 h-[36px]"
             >
               <option value="none">Sắp xếp theo giá</option>
@@ -232,7 +257,10 @@ export default function HistoryUser() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <Search size={16} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search
+                size={16}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400"
+              />
             </div>
           </div>
         </div>
@@ -252,22 +280,41 @@ export default function HistoryUser() {
             <tbody>
               {loading || switchingMonth ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-6 text-gray-500">Đang tải...</td>
+                  <td colSpan={6} className="text-center py-6 text-gray-500">
+                    Đang tải...
+                  </td>
                 </tr>
               ) : currentData.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center text-gray-500 py-6">Không có dữ liệu.</td>
+                  <td colSpan={6} className="text-center text-gray-500 py-6">
+                    Không có dữ liệu.
+                  </td>
                 </tr>
               ) : (
                 currentData.map((row: any, index: number) => {
-                  const categoryInfo = adminCategories.find((c: any) => c.id === row.categoryId);
+                  const categoryInfo = adminCategories.find(
+                    (c: any) => c.id === row.categoryId
+                  );
                   return (
-                    <tr key={row.id} className="border-t hover:bg-gray-50 transition-all">
-                      <td className="px-4 py-3">{(currentPage - 1) * rowsPerPage + index + 1}</td>
-                      <td className="px-4 py-3 font-medium text-gray-800">{categoryInfo?.name || "Không rõ"}</td>
-                      <td className="px-4 py-3 text-gray-700">{row.total.toLocaleString()} ₫</td>
-                      <td className="px-4 py-3 text-gray-600">{row.description}</td>
-                      <td className="px-4 py-3 text-gray-600">{row.createdDate}</td>
+                    <tr
+                      key={row.id}
+                      className="border-t hover:bg-gray-50 transition-all"
+                    >
+                      <td className="px-4 py-3">
+                        {(currentPage - 1) * rowsPerPage + index + 1}
+                      </td>
+                      <td className="px-4 py-3 font-medium text-gray-800">
+                        {categoryInfo?.name || "Không rõ"}
+                      </td>
+                      <td className="px-4 py-3 text-gray-700">
+                        {row.total.toLocaleString()} ₫
+                      </td>
+                      <td className="px-4 py-3 text-gray-600">
+                        {row.description}
+                      </td>
+                      <td className="px-4 py-3 text-gray-600">
+                        {row.createdDate}
+                      </td>
                       <td className="px-4 py-3 text-center">
                         <button
                           onClick={() => handleDelete(row.id)}

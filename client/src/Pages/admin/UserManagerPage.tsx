@@ -18,7 +18,7 @@ export default function UserManagerPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 6;
 
-  // 🟦 Lấy danh sách user
+  // Lấy danh sách user
   useEffect(() => {
     const delay = setTimeout(() => {
       dispatch(fetchUsers({ page: currentPage, limit, search: searchTerm }));
@@ -26,7 +26,7 @@ export default function UserManagerPage() {
     return () => clearTimeout(delay);
   }, [dispatch, currentPage, searchTerm]);
 
-  // 🟩 Đổi trạng thái user
+  // Đổi trạng thái user
   const handleToggleStatus = (user: User) => {
     dispatch(toggleUserStatus(user));
   };
@@ -91,7 +91,7 @@ export default function UserManagerPage() {
         </div>
       </div>
 
-      {/* 🧾 Bảng danh sách */}
+      {/* Bảng danh sách */}
       <div className="bg-white rounded-lg shadow-sm flex flex-col flex-1 overflow-auto max-h-[540px]">
         <div className="overflow-y-auto flex-1">
           {loading ? (
@@ -189,7 +189,7 @@ export default function UserManagerPage() {
           )}
         </div>
 
-        {/* 🔢 Phân trang */}
+        {/* Phân trang */}
         <div className="  p-4 flex justify-end mb-1">
           <div className="flex items-center gap-2">
             <button
